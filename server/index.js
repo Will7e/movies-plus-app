@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: false }));
 
 const port = process.env.PORT || 6000;
 const server = http.createServer(app);
-mongoose.set("strictQuery", false);
+mongoose.set("strictQuery", true);
 mongoose.connect(process.env.MONGODB_URL).then(() => {
     console.log('Connected to MongoDB');
     server.listen(port, () => {
