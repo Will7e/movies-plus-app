@@ -25,3 +25,9 @@ mongoose.connect(process.env.MONGODB_URL).then(() => {
     process.exit(1);
 } 
 );
+
+app.get('/home', (req, res) => {
+    res.send('Hello World!');
+}
+);
+
