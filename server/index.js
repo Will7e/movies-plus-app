@@ -4,8 +4,13 @@ import cors from 'cors';
 import http from 'http';
 import mongoose from 'mongoose';
 import "dotenv/config";
+import routes from "./src/routes/index.js"
+
+
 
 const app = express();
+
+app.use("/api/vi",routes)
 
 app.use(express.json());
 app.use(cookieParser());
@@ -15,6 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 const port = process.env.PORT || 6000;
 const server = http.createServer(app);
 mongoose.set("strictQuery", true);
+
 mongoose.connect(process.env.MONGODB_URL).then(() => {
     console.log('Connected to MongoDB');
     server.listen(port, () => {
@@ -27,7 +33,13 @@ mongoose.connect(process.env.MONGODB_URL).then(() => {
 );
 
 app.get('/home', (req, res) => {
-    res.send('Hello World!');
+   
 }
 );
 
+
+
+
+
+
+ 
