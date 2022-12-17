@@ -41,7 +41,7 @@ remove : async({
 },
 getList : async() =>{
     try {
-        const response = await privateClient.post(reviewEndpoints.getList)
+        const response = await privateClient.get(reviewEndpoints.getList)
         return {response}
     } catch (error) {
         return {error}
