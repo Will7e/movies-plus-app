@@ -2,7 +2,7 @@ import React from 'react'
 
 function FavoriteList() {
   return (
-    <div>FavoriteList</div>
+    <div><h1>{console.log('first')}</h1></div>
   )
 }
 

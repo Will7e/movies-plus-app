@@ -24,7 +24,7 @@ const themeConfigs ={
 
         } : {
             primary :{
-                main :"#ff0000",
+                main :"#ff00000",
             },
             secondary :{
                 main :"#f44336",
