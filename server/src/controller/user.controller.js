@@ -1,6 +1,6 @@
 import userModel from "../models/user.model.js";
 import jsonwebtoken from "jsonwebtoken";
-import responseHandler from "../handlers/response.handler";
+import responseHandler from "../handlers/response.handler.js";
 
 
 const signUp = async (req, res) => {
@@ -66,4 +66,22 @@ const updatePassword = async (req, res) => {
     }catch(err){
         responseHandler.err(res);
     }
+}
+
+const getUserInfo = async (req, res) => {
+    try{
+        const user = await userModel.findById(req.user._id)
+        if(!user) return responseHandler.notFound(res);        
+        
+        responseHandler.ok(res, user);
+    }catch(err){
+        responseHandler.err(res);
+    }
+}
+
+export default {
+    signUp,
+    signIn,
+    updatePassword,
+    getUserInfo
 }
