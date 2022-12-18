@@ -11,6 +11,8 @@ function MainLayout() {
         <Box component="main" flexGrow={1} overflow="hidden" minHeight="100vh">
           <Outlet />
         </Box>
+
+        
       </Box>
     </>
   );
