@@ -1,4 +1,4 @@
-import {ThemeProvider  } from "@mui/material";
+import { ThemeProvider } from "@mui/material";
 import { useSelector } from "react-redux";
 import themeConfigs from "./configs/theme.configs";
 import { ToastContainer } from "react-toastify";
@@ -6,7 +6,7 @@ import { CssBaseline } from "@mui/material";
 import MainLayout from "./components/layout/MainLayout";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import routes from "./routes/routes";
-import PageWrapper from "./components/common/PageWrapper";
+import PageWrapper from "./components/common/PageWrapper.jsx";
 
 function App() {
   const { themeMode } = useSelector((state) => state.themeMode);
@@ -35,6 +35,7 @@ function App() {
                     route.state ? (
                       <PageWrapper state={route.state}>
                         {route.element}
+                        {console.log('AppJS', route.state)}
                       </PageWrapper>
                     ) : (
                       route.element
@@ -47,7 +48,7 @@ function App() {
                   key={index}
                   element={
                     route.state ? (
-                      <PageWrapper>
+                      <PageWrapper state={route.state}>
                         {route.element}
                       </PageWrapper>
                     ) : (
