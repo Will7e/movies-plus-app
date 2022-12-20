@@ -21,6 +21,7 @@ import { setAuthModalOpen } from "../../redux/features/authModalSlice";
 import { setThemeMode } from "../../redux/features/themeModeSlice";
 import Logo from "./Logo";
 import UserMenu from "./UserMenu";
+import Sidebar from "./Sidebar";
 
 const ScrollAppBar = ({ children, window }) => {
   const { themeMode } = useSelector((state) => state.themeMode);
@@ -53,15 +54,21 @@ const TopBar = () => {
   const { themeMode } = useSelector((state) => state.themeMode);
   const dispatch = useDispatch();
   const theme = useTheme();
+  const [sideBarOpen, setSideBarOpen] = useState(false);
 
   const onSwitchTheme = () => {
     const theme =
       themeMode === themeModes.dark ? themeModes.light : themeModes.dark;
     dispatch(setThemeMode(theme));
   };
+
+  const toggleSideBar = () =>{
+    setSideBarOpen(!sideBarOpen)
+  }
   return (
     <>
-      <ScrollAppBar>
+{/*     <Sidebar open={sideBarOpen} theme={theme} toggleSideBar={toggleSideBar}/>
+ */}      <ScrollAppBar>
         <AppBar elevation={0} sx={{ zIndex: 9999 }}>
           <Toolbar
             sx={{ alignItems: "center", justifyContent: "space-between" }}
@@ -70,6 +77,7 @@ const TopBar = () => {
               <IconButton
                 color="inherit"
                 sx={{ mr: 2, display: { md: "none" } }}
+                onClick ={toggleSideBar}
               >
                 <MenuIcon />
               </IconButton>
@@ -111,7 +119,18 @@ const TopBar = () => {
               </IconButton>
             </Box>
 
-            <UserMenu />
+            <Stack spacing={3} direction="row" alignItems="center">
+              {!user && (
+                <Button
+                  variant="contained"
+                  onClick={() => setAuthModalOpen(true)}
+                >
+                  Sign in
+                </Button>
+              ) }
+            </Stack>
+
+           { user && <UserMenu />}
           </Toolbar>
         </AppBar>
       </ScrollAppBar>

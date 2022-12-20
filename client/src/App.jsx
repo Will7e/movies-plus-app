@@ -35,7 +35,6 @@ function App() {
                     route.state ? (
                       <PageWrapper state={route.state}>
                         {route.element}
-                        {console.log('AppJS', route.state)}
                       </PageWrapper>
                     ) : (
                       route.element
