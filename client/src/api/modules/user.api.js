@@ -2,8 +2,8 @@ import privateClient from "../client/private.client.js";
 import publicClient from "../client/public.client.js";
 
 const userEndpoints = {
-  signin: "user/signIn",
-  signup: "user/signUp",
+  signin: "user/signin",
+  signup: "user/signup",
   getInfo: "user/info",
   passwordUpdate: "user/update-password",
   getFavorites: "user/favorites",
@@ -13,13 +13,14 @@ const userEndpoints = {
 const userApi = {
   signin: async ({ username, password }) => {
     try {
+      console.log('sendrequest')
       const response = await publicClient.post(userEndpoints.signin, {
         username,
         password,
       });
-      return response;
+      return {response};
     } catch (error) {
-      return error;
+      return {error};
     }
   },
   signup: async ({ username, password,confirmPassword,displayName}) => {
@@ -30,17 +31,17 @@ const userApi = {
         confirmPassword,
         displayName
       });
-      return response;
-    } catch (error) {
-      return error;
+      return {response};
+    } catch (err) {
+      return {err};
     }
   },
   getInfo: async ({}) => {
     try {
         const response = await privateClient.get(userEndpoints.getInfo)
         return {response}
-    } catch (error) {
-      return error;
+    } catch (err) {
+      return {err};
     }
   },
   passwordUpdate: async ({password,newPassword,confirmNewpassword}) => {
@@ -51,8 +52,8 @@ const userApi = {
             confirmNewpassword
         })
         return {response}
-    } catch (error) {
-      return error;
+    } catch (err) {
+      return {err};
     }
   }
 };

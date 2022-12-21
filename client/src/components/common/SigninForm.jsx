@@ -20,18 +20,19 @@ const SigninForm = ({ switchAuthState }) => {
       username: "",
       password: "",
     },
-    validationSchemaa: Yup.object({
-      username: Yup.string()
-        .min(8, "username minium 8 characters")
-        .required("username is required"),
+
+    validationSchema: Yup.object({
       password: Yup.string()
         .min(8, "password minium 8 characters")
-        .required("password is required"),
+        .required("Password is required"),
+      username: Yup.string()
+        .min(8, "username minium 8 characters")
+        .required("Username is required"),
     }),
     onSubmit: async (values) => {
       setErrorMessage(undefined);
       setIsLoginRequest(true);
-      const { response, err } = await userApi.signin(values);
+      const { response, error } = await userApi.signin(values);
       setIsLoginRequest(false);
 
       if (response) {
@@ -41,12 +42,12 @@ const SigninForm = ({ switchAuthState }) => {
         toast.success("Sign in success");
       }
 
-      if (err) setErrorMessage(err.errorMessage);
+      if (error) setErrorMessage(error.message);
     },
   });
 
   return (
-    <Box component="form">
+    <Box component="form" onSubmit={signinForm.handleSubmit}>
       <Stack spacing={3}>
         <TextField
           type="text"
@@ -88,13 +89,18 @@ const SigninForm = ({ switchAuthState }) => {
       >
         Sign in
       </LoadingButton>
-      <Button
-        fullWidth
-        sx={{ marginTop: 1 }}
-        onClick={() => switchAuthState()}
-      >
+
+      <Button fullWidth sx={{ marginTop: 1 }} onClick={() => switchAuthState()}>
         Sign up
       </Button>
+
+      {errorMessage && (
+        <Box>
+          <Alert severity="error" variant="outlined">
+            {errorMessage}
+          </Alert>
+        </Box>
+      )}
     </Box>
   );
 };
