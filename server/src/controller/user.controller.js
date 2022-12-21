@@ -32,33 +32,36 @@ const signUp = async (req, res) => {
 };
 
 const signIn = async (req, res) => {
-    try {
-      const { username, password } = req.body;
-  
-      const user = await userModel.findOne({ username }).select("username password salt id displayName");
-  
-      if (!user) return responseHandler.badRequest(res, "User not exist");
-  
-      if (!user.validPassword(password)) return responseHandler.badRequest(res, "Wrong password");
-  
-      const token = jsonwebtoken.sign(
-        { data: user.id },
-        process.env.TOKEN_SECRET,
-        { expiresIn: "24h" }
-      );
-  
-      user.password = undefined;
-      user.salt = undefined;
-  
-      responseHandler.created(res, {
-        token,
-        ...user._doc,
-        id: user.id
-      });
-    } catch {
-      responseHandler.err(res);
-    }
-  };
+  try {
+    const { username, password } = req.body;
+
+    const user = await userModel
+      .findOne({ username })
+      .select("username password salt id displayName");
+
+    if (!user) return responseHandler.badRequest(res, "User not exist");
+
+    if (!user.validPassword(password))
+      return responseHandler.badRequest(res, "Wrong password");
+
+    const token = jsonwebtoken.sign(
+      { data: user.id },
+      process.env.TOKEN_SECRET,
+      { expiresIn: "24h" }
+    );
+
+    user.password = undefined;
+    user.salt = undefined;
+
+    responseHandler.created(res, {
+      token,
+      ...user._doc,
+      id: user.id,
+    });
+  } catch {
+    responseHandler.err(res);
+  }
+};
 
 const updatePassword = async (req, res) => {
   try {
