@@ -1,27 +1,27 @@
-import React from 'react'
-import {Typography} from "@mui/material"
+import React from "react";
+import { Typography } from "@mui/material";
+import { green, grey, orange, purple, red } from "@mui/material/colors";
 
-const Logo = ({theme}) => {
-    
+const Logo = ({ theme }) => {
   return (
     <Typography
-    variant="caption"
-    component="div"
-    fontWeight={"700"}
-    fontSize="1.7rem"
-  >
-    <div>
-      Next
-      <span
-        style={{
-          color: theme.palette.primary.main,
-        }}
-      >
-        Flix
-      </span>
-    </div>
-  </Typography>
-  )
-}
+      variant="caption"
+      component="div"
+      fontWeight={"700"}
+      fontSize="1.7rem"
+    >
+      <div>
+        Next
+        <span
+          style={{
+            color: theme.palette.primary.main,
+          }}
+        >
+          Flix
+        </span>
+      </div>
+    </Typography>
+  );
+};
 
-export default Logo
+export default Logo;

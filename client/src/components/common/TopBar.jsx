@@ -67,8 +67,8 @@ const TopBar = () => {
   }
   return (
     <>
-{/*     <Sidebar open={sideBarOpen} theme={theme} toggleSideBar={toggleSideBar}/>
- */}      <ScrollAppBar>
+    <Sidebar open={sideBarOpen} theme={theme} toggleSideBar={toggleSideBar}/>
+      <ScrollAppBar>
         <AppBar elevation={0} sx={{ zIndex: 9999 }}>
           <Toolbar
             sx={{ alignItems: "center", justifyContent: "space-between" }}
