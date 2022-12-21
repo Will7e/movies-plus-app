@@ -1,6 +1,5 @@
 import React from "react";
 import { Typography } from "@mui/material";
-import { green, grey, orange, purple, red } from "@mui/material/colors";
 
 const Logo = ({ theme }) => {
   return (
@@ -9,17 +8,25 @@ const Logo = ({ theme }) => {
       component="div"
       fontWeight={"700"}
       fontSize="1.7rem"
+      href="/"
+      underline="none"
     >
-      <div>
-        Next
+      <a
+        href="/"
+        style={{
+          color: "inherit",
+          textDecoration: "none",
+        }}
+      >
+        Movies
         <span
           style={{
             color: theme.palette.primary.main,
           }}
         >
-          Flix
+          +
         </span>
-      </div>
+      </a>
     </Typography>
   );
 };

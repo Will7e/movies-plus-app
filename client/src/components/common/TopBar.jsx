@@ -123,7 +123,7 @@ const TopBar = () => {
               {!user && (
                 <Button
                   variant="contained"
-                  onClick={() => setAuthModalOpen(true)}
+                  onClick={() => dispatch(setAuthModalOpen(true))}
                 >
                   Sign in
                 </Button>

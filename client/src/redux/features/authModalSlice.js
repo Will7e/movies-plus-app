@@ -7,7 +7,7 @@ export const authModalSlice = createSlice({
     },
     reducers :{
         setAuthModalOpen :(state, action) =>{
-            state.themeMode = action.payload
+            state.authModalOpen = action.payload
         } 
     }
 
