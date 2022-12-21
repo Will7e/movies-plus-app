@@ -1,2 +1,2 @@
-# nextflix-movie-app
+# movie-plus-app
  MERN project
