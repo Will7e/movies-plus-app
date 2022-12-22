@@ -7,6 +7,7 @@ import MainLayout from "./components/layout/MainLayout";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import routes from "./routes/routes";
 import PageWrapper from "./components/common/PageWrapper.jsx";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const { themeMode } = useSelector((state) => state.themeMode);
@@ -14,7 +15,7 @@ function App() {
     <ThemeProvider theme={themeConfigs.custom({ mode: themeMode })}>
       <ToastContainer
         position="bottom-left"
-        autoClose={5000}
+        autoClose={1000}
         hideProgressBar={false}
         closeOnClick
         pauseOnFocusLoss

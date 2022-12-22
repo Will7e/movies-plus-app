@@ -23,8 +23,6 @@ export const AuthModal = ({ theme }) => {
 
   const handleClose = () => dispatch(setAuthModalOpen(false));
 
-  console.log("authModalOpen", authModalOpen);
-
   const switchAuthState = (state) => setAction(state);
   return (
     <Modal open={authModalOpen} onClose={handleClose}>
