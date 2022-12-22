@@ -94,7 +94,11 @@ const Sidebar = ({ open, toggleSideBar, theme }) => {
                 <ListItemIcon>{item.icon}</ListItemIcon>
                 <ListItemText
                   disableTypography
-                  primary={<Typography>{item.display}</Typography>}
+                  primary={
+                    <Typography textTransform="capitalize">
+                      {item.display}
+                    </Typography>
+                  }
                 ></ListItemText>
               </ListItemButton>
             ))}
