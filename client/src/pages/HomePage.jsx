@@ -14,16 +14,30 @@ const HomePage = () => {
         mediaCategory={tmdbConfigs.mediaCategory.popular}
       />
       <Box marginTop="-4rem" sx={{ ...uiConfigs.style.mainContent }}>
-        <Container header="Popular movie">
+        <Container header="Popular movies">
           <MediaSlide
             mediaType={tmdbConfigs.mediaType.movie}
             mediaCategory={tmdbConfigs.mediaCategory.popular}
           />
         </Container>
-        <Container header="Popular movie">
+        <Container header="Popular series">
+          <MediaSlide
+            mediaType={tmdbConfigs.mediaType.tv}
+            mediaCategory={tmdbConfigs.mediaCategory.popular}
+          />
+        </Container>
+
+        <Container header="Top rated movies">
           <MediaSlide
             mediaType={tmdbConfigs.mediaType.movie}
-            mediaCategory={tmdbConfigs.mediaCategory.popular}
+            mediaCategory={tmdbConfigs.mediaCategory.top_rated}
+          />
+        </Container>
+
+        <Container header="Top rated series">
+          <MediaSlide
+            mediaType={tmdbConfigs.mediaType.tv}
+            mediaCategory={tmdbConfigs.mediaCategory.top_rated}
           />
         </Container>
       </Box>
