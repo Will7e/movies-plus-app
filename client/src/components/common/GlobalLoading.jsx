@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setGlobalLoading } from "../../redux/features/globalLoadingSlice";
 import { Paper, Box, Toolbar } from "@mui/material";
 import Logo from "./LoadingLogo";
 
-export default function GlobalLoading({theme}) {
+export default function GlobalLoading({ theme }) {
   const { globalLoading } = useSelector((state) => state.globalLoading);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (globalLoading) {

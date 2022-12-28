@@ -63,13 +63,16 @@ const getMediaDetails = async (req, res) => {
     responseHandler.err(res);
   }
 };
+
 const getGenres = async (req, res) => {
   try {
     const { mediaType } = req.params;
+
     const response = await tmdbApi.mediaGenres({ mediaType });
-    responseHandler.ok(res, response);
-  } catch (err) {
-    responseHandler.err(res, err);
+
+    return responseHandler.ok(res, response);
+  } catch {
+    responseHandler.err(res);
   }
 };
 

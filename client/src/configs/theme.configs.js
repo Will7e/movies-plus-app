@@ -13,7 +13,7 @@ const themeConfigs = {
         ? {
             primary: {
               main: "#50C878",
-              contrastText: "£ffffff",
+              contrastText: "#ffffff",
             },
             secondary: {
               main: "#f44336",

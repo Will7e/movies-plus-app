@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import userApi from "../../api/modules/user.api.js";
 import favoriteApi from "../../api/modules/favorite.api";
 import { setListFavorites, setUser } from "../../redux/features/userSlice";
+import { display } from "@mui/system";
 
 function MainLayout() {
   const dispatch = useDispatch();
@@ -23,6 +24,16 @@ function MainLayout() {
     };
     authUser();
   }, [dispatch]);
+
+  useEffect(() => {
+    const getFavoriteList = async () => {
+      const { response, err } = await favoriteApi.getList();
+      if (response) return dispatch(setListFavorites(response));
+      if (err) return toast.error(err.message);
+    };
+    if (user) getFavoriteList();
+    if (!user) dispatch(setListFavorites([]));
+  }, [user, dispatch]);
 
   const theme = useTheme();
   return (

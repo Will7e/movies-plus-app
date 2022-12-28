@@ -62,14 +62,17 @@ const TopBar = () => {
     dispatch(setThemeMode(theme));
   };
 
-  const toggleSideBar = () =>{
-    setSideBarOpen(!sideBarOpen)
-  }
+  const toggleSideBar = () => {
+    setSideBarOpen(!sideBarOpen);
+  };
   return (
     <>
-    <Sidebar open={sideBarOpen} theme={theme} toggleSideBar={toggleSideBar}/>
+      <Sidebar open={sideBarOpen} theme={theme} toggleSideBar={toggleSideBar} />
       <ScrollAppBar>
-        <AppBar elevation={0} sx={{ zIndex: 9999 }}>
+        <AppBar
+          elevation={0}
+          sx={{ zIndex: 9999}}
+        >
           <Toolbar
             sx={{ alignItems: "center", justifyContent: "space-between" }}
           >
@@ -77,7 +80,7 @@ const TopBar = () => {
               <IconButton
                 color="inherit"
                 sx={{ mr: 2, display: { md: "none" } }}
-                onClick ={toggleSideBar}
+                onClick={toggleSideBar}
               >
                 <MenuIcon />
               </IconButton>
@@ -127,10 +130,10 @@ const TopBar = () => {
                 >
                   Sign in
                 </Button>
-              ) }
+              )}
             </Stack>
 
-           { user && <UserMenu />}
+            {user && <UserMenu />}
           </Toolbar>
         </AppBar>
       </ScrollAppBar>

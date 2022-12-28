@@ -11,7 +11,7 @@ const store = configureStore({
         themeMode:themeModeSlice,
         appState : appStateSlice,
         authModal: authModalSlice,
-        globalLoading:globalLoadingSlice
+        globalLoading: globalLoadingSlice
     }
 })
 

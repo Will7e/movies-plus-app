@@ -1,8 +1,10 @@
-import axios from 'axios'
+import axios from "axios";
 
-const get = async (url ) => {
-  const response = await axios.get(url)
-  return response.data
-}
+const get = async (url) => {
+  const response = await axios.get(url);
+  console.log("url", url);
+  debugger;
+  return response.data;
+};
 
-export default {get}
+export default { get };
