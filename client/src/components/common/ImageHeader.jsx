@@ -14,16 +14,15 @@ const ImageHeader = ({ imgPath }) => {
         backgroundSize: "cover",
         backgroundImage: `url(${imgPath})`,
         backgroundAttachment: "fixed",
-
         "&::before": {
-          content: '"',
+          content: '""',
           position: "absolute",
           left: 0,
           bottom: 0,
           width: "100%",
           height: "100%",
           pointerEvents: "none",
-          ...uiConfigs.style.horizontailGradientBgImage[theme.palette.mode],
+          ...uiConfigs.style.gradienBgImage[theme.palette.mode],
         },
       }}
     />

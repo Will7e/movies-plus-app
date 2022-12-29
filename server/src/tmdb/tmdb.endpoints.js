@@ -9,7 +9,7 @@ const tmdbEndpoints = {
         `/${mediaType}/${mediaId}`
     ),
     mediaGenres: ({mediaType}) => tmdbConfig.getUrl(
-        `genre/${mediaType}/list`
+        `/genre/${mediaType}/list`
     ),
     mediaCredits: ({mediaType, mediaId}) => tmdbConfig.getUrl(
         `/${mediaType}/${mediaId}/credits`

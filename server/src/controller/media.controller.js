@@ -41,7 +41,7 @@ const getMediaDetails = async (req, res) => {
 
     media.images = await tmdbApi.mediaImages(params);
 
-    const tokenDecoded = tokenMiddleware.decodeToken(req);
+    const tokenDecoded = tokenMiddleware.tokenDecode(req);
 
     if (tokenDecoded) {
       const user = await userModel.findById(tokenDecoded.data);
@@ -60,6 +60,7 @@ const getMediaDetails = async (req, res) => {
       .sort("-createdAt");
     responseHandler.ok(res, media);
   } catch (err) {
+    console.log('err', err)
     responseHandler.err(res);
   }
 };

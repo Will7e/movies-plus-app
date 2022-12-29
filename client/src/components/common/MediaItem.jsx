@@ -112,7 +112,7 @@ const MediaItem = ({ media, mediaType }) => {
                 padding: { xs: "10px", md: "2rem 1rem" },
               }}
             >
-              <Stack spacing={{ xs: 1, md: 2 }} alignItems="center">
+              <Stack spacing={{ xs: 1, md: 2 }} alignItems={{md:"center"}}>
                 {rate && (
                   <CircularRate color={"secondary.contrastText"} value={rate} />
                 )}
