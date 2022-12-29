@@ -9,7 +9,11 @@ import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { setGlobalLoading } from "../redux/features/globalLoadingSlice";
 import { setAuthModalOpen } from "../redux/features/authModalSlice";
-import { setListFavorites, removeFavorite } from "../redux/features/userSlice";
+import {
+  listFavorites,
+  removeFavorite,
+  addFavorite,
+} from "../redux/features/userSlice";
 import CircularRate from "../components/common/CircularRate";
 import Container from "../components/common/Container";
 import tmdbConfigs from "../api/configs/tmdb.config";
@@ -17,16 +21,15 @@ import mediaApi from "../api/modules/media.api";
 import favoriteApi from "../api/modules/favorite.api";
 import ImageHeader from "../components/common/ImageHeader";
 import uiConfigs from "../configs/ui.configs";
-import { margin } from "@mui/system";
+import CastSlide from "../components/common/CastSlide";
+
 function MediaDetail() {
   const { mediaType, mediaId } = useParams();
   const { user, listFavorites } = useSelector((state) => state.user);
-
   const [media, setMedia] = useState();
-  const [isFavorite, setFavorite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
   const [onRequest, setOnRequest] = useState(false);
   const [genres, setGenres] = useState([]);
-
   const dispatch = useDispatch();
   const videoRef = useRef(null);
 
@@ -41,7 +44,8 @@ function MediaDetail() {
 
       if (response) {
         setMedia(response);
-        setFavorite(response.isFavorite);
+        console.log("first", response);
+        setIsFavorite(response.favorite);
         setGenres(response.genres.splice(0, 2));
       }
 
@@ -51,11 +55,44 @@ function MediaDetail() {
     getMedia();
   }, [mediaType, mediaId, dispatch]);
 
+  console.log("listFavorites", listFavorites);
+
+  const onFavoriteClick = async () => {
+    if (!user) return dispatch(setAuthModalOpen(true));
+
+    if (onRequest) return;
+
+    if (isFavorite) {
+      return;
+    }
+
+    setOnRequest(true);
+
+    const body = {
+      mediaId: media.id,
+      mediaTitle: media.title || media.name,
+      mediaType: mediaType,
+      mediaPoster: media.poster_path,
+      mediaRate: media.vote_average,
+    };
+
+    const { response, error } = await favoriteApi.add(body);
+
+    setOnRequest(false);
+
+    if (error) return toast.error(error.message);
+    if (response) {
+      dispatch(addFavorite(response));
+      setIsFavorite(true);
+      toast.success(`${media.title || media.name} added as favorite`);
+    }
+  };
+
   return media ? (
     <>
       <ImageHeader
         imgPath={tmdbConfigs.backdropPath(
-          media.backdrop_path || media.posterPath
+          media.backdrop_path || media.poster_path
         )}
       />
       <Box
@@ -64,29 +101,39 @@ function MediaDetail() {
           ...uiConfigs.style.mainContent,
         }}
       >
+        {/* media content */}
         <Box
           sx={{
-            display: "flex",
-            flexDirection: { md: "row", xs: "column" },
+            marginTop: { xs: "-10rem", md: "-15rem", lg: "-20rem" },
           }}
         >
           <Box
             sx={{
-              width: { xs: "70%", sm: "50%", md: "35%" },
-              margin: { xs: "0 auto 2rem", md: "0 2rem 0 0" },
+              display: "flex",
+              flexDirection: { md: "row", xs: "column" },
             }}
           >
+            {/* poster */}
             <Box
               sx={{
-                paddingTop: "140%",
-                ...uiConfigs.style.backgroundImage(
-                  tmdbConfigs.posterPath(
-                    media.poster_path || media.backdrop_path
-                  )
-                ),
+                width: { xs: "70%", sm: "50%", md: "40%" },
+                margin: { xs: "0 auto 2rem", md: "0 2rem 0 0" },
               }}
-            ></Box>
+            >
+              <Box
+                sx={{
+                  paddingTop: "140%",
+                  ...uiConfigs.style.backgroundImage(
+                    tmdbConfigs.posterPath(
+                      media.poster_path || media.backdrop_path
+                    )
+                  ),
+                }}
+              />
+            </Box>
+            {/* poster */}
 
+            {/* media info */}
             <Box
               sx={{
                 width: { xs: "100%", md: "60%" },
@@ -94,14 +141,74 @@ function MediaDetail() {
               }}
             >
               <Stack spacing={5}>
-                {/* title*/}
-                <Typography sx={{...uiConfigs.style.typoLines(2,"left")}} fontWeight="700" variant="h4" fontSize={{xs:"2rem", md:"2rem", lg:"4rem"}}>
+                <Typography
+                  variant="h4"
+                  fontSize={{ xs: "2rem", md: "2rem", lg: "4rem" }}
+                  fontWeight="700"
+                  sx={{ ...uiConfigs.style.typoLines(2, "left") }}
+                >
                   {`${media.title || media.name} ${
                     mediaType === tmdbConfigs.mediaType.movie
                       ? media.release_date.split("-")[0]
                       : media.first_air_date.split("-")[0]
                   }`}
                 </Typography>
+
+                <Stack direction="row" spacing={1} alignItems="center">
+                  <CircularRate value={media.vote_average} />
+
+                  <Divider orientation="vertical" />
+
+                  {genres.map((genre, index) => (
+                    <Chip
+                      label={genre.name}
+                      variant="filled"
+                      color="primary"
+                      key={index}
+                    />
+                  ))}
+                </Stack>
+
+                <Typography
+                  variant="body1"
+                  sx={{ ...uiConfigs.style.typoLines(5) }}
+                >
+                  {media.overview}
+                </Typography>
+
+                {/* buttons */}
+                <Stack direction="row" spacing={1}>
+                  <LoadingButton
+                    variant="text"
+                    sx={{
+                      width: "max-content",
+                      "& .MuiButon-starIcon": { marginRight: "0" },
+                    }}
+                    size="large"
+                    startIcon={
+                      isFavorite ? (
+                        <FavoriteIcon />
+                      ) : (
+                        <FavoriteBorderOutlinedIcon />
+                      )
+                    }
+                    loadingPosition="start"
+                    loading={onRequest}
+                    onClick={onFavoriteClick}
+                  />
+                  <Button
+                    variant="contained"
+                    sx={{ width: "max-content" }}
+                    size="large"
+                    startIcon={<PlayArrowIcon />}
+                    onClick={() => videoRef.current.scrollIntoView()}
+                  >
+                    watch now
+                  </Button>
+                </Stack>
+                <Container header={"Cast"}>
+                  <CastSlide casts={media.credits.cast} />
+                </Container>
               </Stack>
             </Box>
           </Box>

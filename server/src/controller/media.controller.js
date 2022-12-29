@@ -43,6 +43,8 @@ const getMediaDetails = async (req, res) => {
 
     const tokenDecoded = tokenMiddleware.tokenDecode(req);
 
+   
+
     if (tokenDecoded) {
       const user = await userModel.findById(tokenDecoded.data);
 
@@ -58,9 +60,10 @@ const getMediaDetails = async (req, res) => {
       .find({ mediaId })
       .populate("user")
       .sort("-createdAt");
+
+      console.log('media.favorite', media)
     responseHandler.ok(res, media);
   } catch (err) {
-    console.log('err', err)
     responseHandler.err(res);
   }
 };

@@ -38,7 +38,7 @@ const CircularRate = ({ value,color }) => {
             marginTop: "-5px",
           }}
         >
-          {(value * 10) / 10}
+          {((value * 10) / 10).toFixed(1)}
         </Typography>
       </Box>
     </Box>

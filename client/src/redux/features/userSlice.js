@@ -16,7 +16,7 @@ export const userSlice = createSlice({
             state.user =action.payload
         },
         setListFavorites :(state,action)=>{
-            state.action = action.payload
+            state.listFavorites = action.payload
         },
         removeFavorite :(state,action)=>{
             const {mediaId} = action.payload

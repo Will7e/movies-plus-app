@@ -28,11 +28,19 @@ function MainLayout() {
   useEffect(() => {
     const getFavoriteList = async () => {
       const { response, err } = await favoriteApi.getList();
+
       if (response) return dispatch(setListFavorites(response));
+
       if (err) return toast.error(err.message);
     };
-    if (user) getFavoriteList();
-    if (!user) dispatch(setListFavorites([]));
+
+    
+    if (user) {
+      getFavoriteList();
+    }
+    if (!user) {
+      dispatch(setListFavorites([]));
+    }
   }, [user, dispatch]);
 
   const theme = useTheme();
