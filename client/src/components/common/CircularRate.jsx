@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography, CircularProgress } from "@mui/material";
 
-const CircularRate = ({ value }) => {
+const CircularRate = ({ value,color }) => {
   return (
     <Box
       sx={{
@@ -33,6 +33,7 @@ const CircularRate = ({ value }) => {
           variant="caption"
           component="div"
           fontWeight="700"
+          color={color}
           sx={{
             marginTop: "-5px",
           }}

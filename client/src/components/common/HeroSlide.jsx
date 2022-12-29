@@ -159,7 +159,7 @@ const HeroSlide = ({ mediaType, mediaCategory }) => {
                   <Stack spacing={1} direction="row" alignItems="center">
                     <CircularRate value={movie.vote_average} />
                     <Divider orientation="vertical" />
-                    {[...movie.genre_ids].slice(0, 2).map((genreId, index) => (
+                    {[...movie.genre_ids].slice(0, 3).map((genreId, index) => (
                       <Chip
                         label={genres.find((e) => e.id === genreId).name}
                         variant="filled"
