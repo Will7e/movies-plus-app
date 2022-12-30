@@ -22,6 +22,10 @@ import favoriteApi from "../api/modules/favorite.api";
 import ImageHeader from "../components/common/ImageHeader";
 import uiConfigs from "../configs/ui.configs";
 import CastSlide from "../components/common/CastSlide";
+import MediaVideoSlide from "../components/common/MediaVideoSlide";
+import ImageSlide from "../components/common/ImageSlide";
+import RecommendSlide from "../components/common/RecommendSlide";
+import MediaSlide from "../components/common/MediaSlide";
 
 function MediaDetail() {
   const { mediaType, mediaId } = useParams();
@@ -44,7 +48,6 @@ function MediaDetail() {
 
       if (response) {
         setMedia(response);
-        console.log("first", response);
         setIsFavorite(response.favorite);
         setGenres(response.genres.splice(0, 2));
       }
@@ -55,14 +58,13 @@ function MediaDetail() {
     getMedia();
   }, [mediaType, mediaId, dispatch]);
 
-  console.log("listFavorites", listFavorites);
-
   const onFavoriteClick = async () => {
     if (!user) return dispatch(setAuthModalOpen(true));
 
     if (onRequest) return;
 
     if (isFavorite) {
+      onRemoveFavorite();
       return;
     }
 
@@ -87,6 +89,30 @@ function MediaDetail() {
       toast.success(`${media.title || media.name} added as favorite`);
     }
   };
+
+  const onRemoveFavorite = async () => {
+    if (onRequest) return setOnRequest(true);
+
+    const favorite = listFavorites.find(
+      (e) => Number(e.mediaId) === Number(media.id)
+    );
+
+    const { response, error } = await favoriteApi.remove({
+      favoriteId: favorite.id,
+    });
+
+    setOnRequest(false);
+
+    if (error) toast.error(error.message);
+    if (response) {
+      dispatch(removeFavorite(favorite));
+      setIsFavorite(false);
+      console.log("favorite", favorite);
+      toast.success(`${favorite.mediaTitle} removed from favorites`);
+    }
+  };
+
+  console.log("media", media);
 
   return media ? (
     <>
@@ -213,6 +239,35 @@ function MediaDetail() {
             </Box>
           </Box>
         </Box>
+
+        <div ref={videoRef} style={{ paddingTop: "2rem  " }}>
+          <Container header={"Videos"}>
+            <MediaVideoSlide videos={media.videos.results} />
+          </Container>
+        </div>
+
+        {media?.images.backdrops.length > 0 && (
+          <Container header={"Images"}>
+            <ImageSlide mode={true} images={media.images.backdrops} />
+          </Container>
+        )}
+
+        {media?.images.posters.length > 0 && (
+          <Container header={"Posters"}>
+            <ImageSlide mode={false} images={media.images.posters} />
+          </Container>
+        )}
+
+        <Container header={"Recommend"}>
+          {media.recommend.length > 0 ? (
+            <RecommendSlide medias={media.recommend} />
+          ) : (
+            <MediaSlide
+              mediaType={mediaType}
+              mediaCategory={tmdbConfigs.mediaCategory.top_rated}
+            />
+          )}
+        </Container>
       </Box>
     </>
   ) : null;

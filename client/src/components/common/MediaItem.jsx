@@ -17,7 +17,6 @@ const MediaItem = ({ media, mediaType }) => {
   const [releaseDate, setReleaseDate] = useState(null);
   const [rate, setRate] = useState(null);
 
-
   useEffect(() => {
     setTitle(media.title || media.name || media.mediaTitle);
     setPosterPath(
@@ -51,8 +50,12 @@ const MediaItem = ({ media, mediaType }) => {
         sx={{
           ...uiConfigs.style.backgroundImage(posterPath),
           paddingTop: "160%",
+          margin:"0.2rem",
           "&:hover .media-info": { opacity: 1, bottom: 0 },
-          "&:hover .media-back-drop, &:hover .media-play-btn": { opacity: 1 },
+          "&:hover .media-back-drop, &:hover .media-play-btn, &:hover .favorite-icon":
+            {
+              opacity: 1,
+            },
           color: "primary.contrastText",
         }}
       >
@@ -60,12 +63,14 @@ const MediaItem = ({ media, mediaType }) => {
           <>
             {favoriteUtils.check({ listFavorites, mediaId: media.id }) && (
               <FavoriteIcon
+                className="favorite-icon"
                 color="primary"
                 sx={{
                   position: "absolute",
                   top: 2,
-                  right: 2,
+                  left: 2,
                   fontSize: "2rem",
+                  opacity: 0,
                 }}
               />
             )}
@@ -113,7 +118,7 @@ const MediaItem = ({ media, mediaType }) => {
                 padding: { xs: "10px", md: "2rem 1rem" },
               }}
             >
-              <Stack spacing={{ xs: 1, md: 2 }} alignItems={{md:"center"}}>
+              <Stack spacing={{ xs: 1, md: 2 }} alignItems={{ md: "center" }}>
                 {rate && (
                   <CircularRate color={"secondary.contrastText"} value={rate} />
                 )}

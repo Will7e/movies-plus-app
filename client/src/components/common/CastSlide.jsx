@@ -27,31 +27,30 @@ const CastSlide = ({ casts }) => {
               <Box
                 sx={{
                   paddingTop: "120%",
-                  color:"secondary.contrastText",
+                  color: "secondary.contrastText",
                   ...uiConfigs.style.backgroundImage(
                     tmdbConfigs.posterPath(cast.profile_path)
                   ),
                 }}
               >
-              <Box
-                sx={{
-                  position: "absolute",
-                  width: "100%",
-                  height: "max-content",
-                  bottom: 0,
-                  padding: "10px",
-                  backgroundColor: "rgba(0,0,0,0.6)",
-                }}
-              >
-                <Typography
+                <Box
                   sx={{
-                    ...uiConfigs.style.typoLines(1, "left"),
-                    
+                    position: "absolute",
+                    width: "100%",
+                    height: "max-content",
+                    bottom: 0,
+                    padding: "10px",
+                    backgroundColor: "rgba(0,0,0,0.6)",
                   }}
                 >
-                  {cast.name}
-                </Typography>
-              </Box>
+                  <Typography
+                    sx={{
+                      ...uiConfigs.style.typoLines(1, "left"),
+                    }}
+                  >
+                    {cast.name}
+                  </Typography>
+                </Box>
               </Box>
             </Link>
           </SwiperSlide>

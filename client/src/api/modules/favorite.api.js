@@ -33,7 +33,7 @@ const favoriteApi = {
     },
     remove: async ({favoriteId})=>{
         try {
-            const response = await privateClient.delete(favoriteEndpoints.delete({favoriteId}))
+            const response = await privateClient.delete(favoriteEndpoints.remove({favoriteId}))
             return {response}
         } catch (error) {
             return {error}

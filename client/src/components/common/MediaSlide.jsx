@@ -4,6 +4,7 @@ import mediaApi from "../../api/modules/media.api";
 import { toast } from "react-toastify";
 import AutoSwiper from "./AutoSwiper";
 import MediaItem from "./MediaItem";
+import { Stack } from "@mui/material";
 
 const MediaSlide = ({ mediaType, mediaCategory }) => {
   const [medias, setMedias] = useState([]);
