@@ -1,22 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { LoadingButton } from "@mui/lab";
-import {
-  Box,
-  Button,
-  Divider,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import dayjs from "dayjs";
 import { toast } from "react-toastify";
-import SendOutLinedIcon from "@mui/icons-material/SendOutlined";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useSelector } from "react-redux";
 import reviewApi from "../../api/modules/review.api";
-import Container from "./Container";
 import TextAvatar from "./TextAvatar";
-import { redirect } from "react-router-dom";
 
 const ReviewItem = ({ review, onRemoved }) => {
   const { user } = useSelector((state) => state.user);
