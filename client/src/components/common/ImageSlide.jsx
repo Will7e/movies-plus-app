@@ -9,7 +9,7 @@ import AutoSwiper from "./AutoSwiper";
 const ImageSlide = ({ images, mode }) => {
   return mode ? (
     <NavigationSwiper>
-      {images.splice(0, 10).map((item, index) => (
+      {[...images].splice(0, 10).map((item, index) => (
         <SwiperSlide key={index}>
           <Box
             sx={{
@@ -27,11 +27,11 @@ const ImageSlide = ({ images, mode }) => {
     </NavigationSwiper>
   ) : (
     <AutoSwiper>
-      {images.splice(0, 15).map((item, index) => (
+      {[...images].splice(0, 15).map((item, index) => (
         <SwiperSlide key={index}>
           <Box
             sx={{
-              margin:"0.3rem",
+              margin: "0.3rem",
               paddingTop: "160%",
               backgroundPosition: "center",
               backgroundSize: "cover",

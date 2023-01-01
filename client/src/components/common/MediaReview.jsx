@@ -8,7 +8,6 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import dayjs from "dayjs";
 import { toast } from "react-toastify";
 import SendOutLinedIcon from "@mui/icons-material/SendOutlined";
 import { useSelector } from "react-redux";
@@ -82,6 +81,9 @@ const MediaReview = ({ reviews, media, mediaType }) => {
 
     
   };
+
+  console.log('listReviews', listReviews)
+  console.log('filteredReviews', filteredReviews)
 
   return (
     <Container header={`REVIEWS (${reviewCount})`}>

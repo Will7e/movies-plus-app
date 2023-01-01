@@ -161,7 +161,10 @@ const HeroSlide = ({ mediaType, mediaCategory }) => {
                     <Divider orientation="vertical" />
                     {[...movie.genre_ids].slice(0, 3).map((genreId, index) => (
                       <Chip
-                        label={genres.find((e) => e.id === genreId).name}
+                        label={
+                          genres.find((e) => e.id === genreId) &&
+                          genres.find((e) => e.id === genreId).name
+                        }
                         variant="filled"
                         color="primary"
                         key={index}

@@ -243,7 +243,7 @@ function MediaDetail() {
 
         <div ref={videoRef} style={{ paddingTop: "2rem  " }}>
           <Container header={"Videos"}>
-            <MediaVideoSlide videos={media.videos.results} />
+            <MediaVideoSlide videos={[...media.videos.results]} />
           </Container>
         </div>
 
