@@ -17,6 +17,7 @@ import Container from "./Container";
 import ReviewItem from "./ReviewItem";
 import TextAvatar from "./TextAvatar";
 
+
 const MediaReview = ({ reviews, media, mediaType }) => {
   const { user } = useSelector((state) => state.user);
   const [listReviews, setListReviews] = useState([]);
@@ -72,7 +73,7 @@ const MediaReview = ({ reviews, media, mediaType }) => {
     if (listReviews.findIndex((e) => e.id === id) !== -1) {
       const newListReviews = [...listReviews].filter((e) => e.id !== id);
       setListReviews(newListReviews);
-      setFilteredReviews([newListReviews].splice(0, page * skip));
+      setFilteredReviews([...newListReviews].splice(0, page * skip));
     } else {
       setFilteredReviews([...filteredReviews].filter((e) => e.id !== id));
     }
