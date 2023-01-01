@@ -16,6 +16,7 @@ export default function GlobalLoading({ theme }) {
         setIsLoading(false);
       }, 1000);
     }
+    window.scrollTo(0, 0);
   }, [globalLoading]);
 
   if (isLoading)

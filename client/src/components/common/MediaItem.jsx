@@ -50,7 +50,7 @@ const MediaItem = ({ media, mediaType }) => {
         sx={{
           ...uiConfigs.style.backgroundImage(posterPath),
           paddingTop: "160%",
-          margin:"0.2rem",
+          margin: "0.2rem",
           "&:hover .media-info": { opacity: 1, bottom: 0 },
           "&:hover .media-back-drop, &:hover .media-play-btn, &:hover .favorite-icon":
             {

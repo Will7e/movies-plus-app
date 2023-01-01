@@ -21,19 +21,17 @@ router.post(
     .withMessage("Content id is required")
     .isLength({ min: 1 })
     .withMessage("Content id is not found"),
-  body("mediaType").custom((type) =>
-    ["tv", "movite"].includes(type).withMessage(" Media type is invalid")
-  ),
+  body("mediaType")
+    .exists()
+    .withMessage("mediaType is required")
+    .custom((type) => ["movie", "tv"].includes(type))
+    .withMessage("mediaType invalid"),
   body("mediaTitle").exists().withMessage("Media title is required"),
-    body("mediaPoster").exists().withMessage("Media poster is required"),
-    body("mediaRate").exists().withMessage("Media rate is required"),
+  body("mediaPoster").exists().withMessage("Media poster is required"),
   requestHandler.validate,
   reviewController.create
 );
 
-router.delete("/:reviewId",
-tokenMiddleware.auth,
-reviewController.remove
-)
+router.delete("/:reviewId", tokenMiddleware.auth, reviewController.remove);
 
 export default router;
