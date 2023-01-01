@@ -25,7 +25,7 @@ const reviewApi ={
     })
     return {response}
 }catch(err){
-    console.log('err', err)
+   
 return {err}
 }
 },

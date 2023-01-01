@@ -108,12 +108,12 @@ function MediaDetail() {
     if (response) {
       dispatch(removeFavorite(favorite));
       setIsFavorite(false);
-      console.log("favorite", favorite);
+      
       toast.success(`${favorite.mediaTitle} removed from favorites`);
     }
   };
 
-  console.log("media", media);
+ 
 
   return media ? (
     <>

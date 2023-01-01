@@ -82,8 +82,7 @@ const MediaReview = ({ reviews, media, mediaType }) => {
     
   };
 
-  console.log('listReviews', listReviews)
-  console.log('filteredReviews', filteredReviews)
+  
 
   return (
     <Container header={`REVIEWS (${reviewCount})`}>

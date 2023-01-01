@@ -3,7 +3,7 @@ const key = process.env.TDMB_API_KEY;
 
 const getUrl = (endpoints, params) => {
   const qs = new URLSearchParams(params);
-  return `${base_URL}${endpoints}?api_key=${key}&${qs.toString()}`;
+  return `${base_URL}${endpoints}?api_key=${key}&${qs}`;
 };
 
 export default { getUrl };

@@ -13,7 +13,6 @@ const userEndpoints = {
 const userApi = {
   signin: async ({ username, password }) => {
     try {
-      console.log("sendrequest");
       const response = await publicClient.post(userEndpoints.signin, {
         username,
         password,

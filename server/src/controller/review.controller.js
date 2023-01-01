@@ -16,7 +16,7 @@ const create = async (req, res) => {
             user: req.user
         });
     } catch (err) {
-        console.log('err', err)
+        
         responseHandler.err(res);
     }
 }

@@ -8,13 +8,13 @@ import tokenMiddleware from "../middlewares/token.middleware.js";
 const getList = async (req, res) => {
   try {
     const { page } = req.query;
+
     const { mediaType, mediaCategory } = req.params;
     const response = await tmdbApi.mediaList({
       mediaType,
       mediaCategory,
       page,
     });
-
     responseHandler.ok(res, response);
   } catch (err) {
     responseHandler.err(res, err);
@@ -43,8 +43,6 @@ const getMediaDetails = async (req, res) => {
 
     const tokenDecoded = tokenMiddleware.tokenDecode(req);
 
-   
-
     if (tokenDecoded) {
       const user = await userModel.findById(tokenDecoded.data);
 
@@ -61,7 +59,7 @@ const getMediaDetails = async (req, res) => {
       .populate("user")
       .sort("-createdAt");
 
-      console.log('media.favorite', media)
+  
     responseHandler.ok(res, media);
   } catch (err) {
     responseHandler.err(res);

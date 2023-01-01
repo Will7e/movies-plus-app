@@ -20,7 +20,7 @@ const addFavorite = async (req, res) => {
     responseHandler.created(res, favorite);
     
   } catch (err) {
-    console.log( err);
+    
     responseHandler.err(res);
   }
 };
