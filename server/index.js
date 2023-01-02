@@ -6,7 +6,6 @@ import mongoose from "mongoose";
 import "dotenv/config";
 import routes from "./src/routes/index.js";
 
-
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -19,7 +18,7 @@ const server = http.createServer(app);
 mongoose.set("strictQuery", true);
 
 mongoose
-  .connect(process.env.MONGODB_URL.toString())
+  .connect(process.env.MONGODB_URL, { useNewUrlParser: true })
   .then(() => {
     console.log("Connected to MongoDB");
     server.listen(port, () => {
