@@ -65,18 +65,21 @@ const signIn = async (req, res) => {
 
 const updatePassword = async (req, res) => {
   try {
-    const { oldPassword, newPassword } = req.body;
+    const { password, newPassword } = req.body;
+
     const user = await userModel
-      .findById(req.user._id)
+      .findById(req.user.id)
       .select("password id salt");
 
     if (!user) return responseHandler.unAuthorized(res);
 
-    if (!user.validatePassword(oldPassword))
-      return responseHandler.badRequest(res, "Old password is incorrect");
+    if (!user.validPassword(password))
+      return responseHandler.badRequest(res, "Wrong password");
 
     user.setPassword(newPassword);
+
     await user.save();
+
     responseHandler.ok(res);
   } catch {
     responseHandler.err(res);

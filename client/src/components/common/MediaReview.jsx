@@ -83,7 +83,7 @@ const MediaReview = ({ reviews, media, mediaType }) => {
       <Stack spacing={4} marginBottom={2}>
         {filteredReviews.map((item, index) => (
           <Box key={index}>
-            <ReviewItem review={item} onRemoved={onRemoved} />
+            <ReviewItem reviewItemFor={"mediaDetail"} review={item} onRemoved={onRemoved} />
             <Divider sx={{ display: { xs: "block", md: "none" } }} />
           </Box>
         ))}
@@ -98,7 +98,7 @@ const MediaReview = ({ reviews, media, mediaType }) => {
           <Divider />
 
           <Stack direction={"row"} spacing={2}>
-            <TextAvatar text={user.displayName} />
+            <TextAvatar w={40} h={40} text={user.displayName} />
             <Stack flexGrow={1} spacing={2}>
               <Typography fontWeight={"700"} variant="h6">
                 {user.displayName}

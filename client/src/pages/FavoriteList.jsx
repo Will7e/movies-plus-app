@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { LoadingButton } from "@mui/lab";
-import { Box, Button, Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import MediaItem from "../components/common/MediaItem";
 import Container from "../components/common/Container";
 import uiConfigs from "../configs/ui.configs";
 import favoriteApi from "../api/modules/favorite.api";
 import { setGlobalLoading } from "../redux/features/globalLoadingSlice";
-import { removeFavorite } from "../redux/features/userSlice";
 import FavoriteItem from "../components/common/FavoriteItem";
 
 function FavoriteList() {

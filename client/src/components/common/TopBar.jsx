@@ -7,7 +7,6 @@ import {
   AppBar,
   Box,
   Button,
-  Icon,
   IconButton,
   Stack,
   Toolbar,

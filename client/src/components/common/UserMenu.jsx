@@ -6,16 +6,19 @@ import {
   ListItemText,
   Menu,
   Typography,
+  Box,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import menuConfigs from "../../configs/menu.configs";
 import { setUser } from "../../redux/features/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setGlobalLoading } from "../../redux/features/globalLoadingSlice";
 import { toast } from "react-toastify";
+import TextAvatar from "./TextAvatar";
 
 const UserMenu = () => {
   const { user } = useSelector((state) => state.user);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -31,19 +34,33 @@ const UserMenu = () => {
     setTimeout(() => {
       dispatch(setGlobalLoading(false));
     }, 1);
+    navigate("/");
   };
 
   return (
     <>
       {user && (
         <>
-          <Typography
-            variant="h6"
-            sx={{ cursor: "pointer", userSelect: "none" }}
+          <Box
             onClick={toggleMenu}
+            alignItems={"center"}
+            justifyContent={"center"}
+            sx={{
+              display: "flex",
+              gap: 1,
+              backgroundColor: "in",
+              cursor: "pointer",
+            }}
           >
-            {user.displayName}
-          </Typography>
+            <TextAvatar w={35} h={35} text={user.displayName} />
+            <Typography
+              variant="h6"
+              sx={{ cursor: "pointer", userSelect: "none" }}
+            >
+              {user.displayName}
+            </Typography>{" "}
+          </Box>
+
           <Menu
             open={Boolean(anchorEl)}
             anchorEl={anchorEl}

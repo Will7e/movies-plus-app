@@ -10,7 +10,6 @@ import { toast } from "react-toastify";
 import { setGlobalLoading } from "../redux/features/globalLoadingSlice";
 import { setAuthModalOpen } from "../redux/features/authModalSlice";
 import {
-  listFavorites,
   removeFavorite,
   addFavorite,
 } from "../redux/features/userSlice";

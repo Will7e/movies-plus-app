@@ -44,12 +44,12 @@ const userApi = {
     }
   },
   
-  passwordUpdate: async ({ password, newPassword, confirmNewpassword }) => {
+  passwordUpdate: async ({ password, newPassword, confirmNewPassword }) => {
     try {
       const response = await privateClient.put(userEndpoints.passwordUpdate, {
         password,
         newPassword,
-        confirmNewpassword,
+        confirmNewPassword,
       });
       return { response };
     } catch (err) {

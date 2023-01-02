@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { LoadingButton } from "@mui/lab";
 import { Alert, Box, Button, Stack, TextField } from "@mui/material";
 import { useFormik } from "formik";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { setAuthModalOpen } from "../../redux/features/authModalSlice";
 import userApi from "../../api/modules/user.api";
@@ -29,6 +29,7 @@ const SignupForm = ({ switchAuthState }) => {
         .min(8, "password minium 8 characters")
         .required("Password is required"),
       confirmPassword: Yup.string()
+        .oneOf([Yup.ref("password")], "Confirm password not match")
         .min(8, "password minium 8 characters")
         .required("Confirm password is required"),
       username: Yup.string()
@@ -42,10 +43,10 @@ const SignupForm = ({ switchAuthState }) => {
     onSubmit: async (values) => {
       setErrorMessage(undefined);
       setIsLoginRequest(true);
-      dispatch(setGlobalLoading(true))
+      dispatch(setGlobalLoading(true));
       const { response, error } = await userApi.signup(values);
       setIsLoginRequest(false);
-      dispatch(setGlobalLoading(false))
+      dispatch(setGlobalLoading(false));
       if (response) {
         signupForm.resetForm();
         dispatch(setUser(response));
