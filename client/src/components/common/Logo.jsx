@@ -1,44 +1,34 @@
 import React from "react";
-import { Typography, useTheme, Box } from "@mui/material";
-import CircularProgress from "./CustomCircularProgress";
+import { Typography } from "@mui/material";
 
-function Logo() {
-  const theme = useTheme();
+const Logo = ({ theme }) => {
   return (
-    <>
-      <CircularProgress  />
-      <Box
-        sx={{
-          top: 0,
-          left: 0,
-          bottom: 0,
-          right: 0,
-          position: "absolute",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+    <Typography
+      variant="caption"
+      component="div"
+      fontWeight={"700"}
+      fontSize="1.7rem"
+      href="/"
+      underline="none"
+    >
+      <a
+        href="/"
+        style={{
+          color: "inherit",
+          textDecoration: "none",
         }}
       >
-        <Typography
-          variant="caption"
-          component="div"
-          fontWeight={"700"}
-          fontSize="1.7rem"
+        Movies
+        <span
+          style={{
+            color: theme.palette.primary.main,
+          }}
         >
-          <div>
-            Next
-            <span
-              style={{
-                color: theme.palette.primary.main,
-              }}
-            >
-              Flix
-            </span>
-          </div>
-        </Typography>
-      </Box>
-    </>
+          +
+        </span>
+      </a>
+    </Typography>
   );
-}
+};
 
 export default Logo;

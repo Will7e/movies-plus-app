@@ -8,13 +8,13 @@ import tokenMiddleware from "../middlewares/token.middleware.js";
 const getList = async (req, res) => {
   try {
     const { page } = req.query;
+
     const { mediaType, mediaCategory } = req.params;
     const response = await tmdbApi.mediaList({
       mediaType,
       mediaCategory,
       page,
     });
-
     responseHandler.ok(res, response);
   } catch (err) {
     responseHandler.err(res, err);
@@ -41,7 +41,7 @@ const getMediaDetails = async (req, res) => {
 
     media.images = await tmdbApi.mediaImages(params);
 
-    const tokenDecoded = tokenMiddleware.decodeToken(req);
+    const tokenDecoded = tokenMiddleware.tokenDecode(req);
 
     if (tokenDecoded) {
       const user = await userModel.findById(tokenDecoded.data);
@@ -58,18 +58,23 @@ const getMediaDetails = async (req, res) => {
       .find({ mediaId })
       .populate("user")
       .sort("-createdAt");
+
+  
     responseHandler.ok(res, media);
   } catch (err) {
     responseHandler.err(res);
   }
 };
+
 const getGenres = async (req, res) => {
   try {
     const { mediaType } = req.params;
+
     const response = await tmdbApi.mediaGenres({ mediaType });
-    responseHandler.ok(res, response);
-  } catch (err) {
-    responseHandler.err(res, err);
+
+    return responseHandler.ok(res, response);
+  } catch {
+    responseHandler.err(res);
   }
 };
 

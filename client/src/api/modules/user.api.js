@@ -2,8 +2,8 @@ import privateClient from "../client/private.client.js";
 import publicClient from "../client/public.client.js";
 
 const userEndpoints = {
-  signin: "user/signIn",
-  signup: "user/signUp",
+  signin: "user/signin",
+  signup: "user/signup",
   getInfo: "user/info",
   passwordUpdate: "user/update-password",
   getFavorites: "user/favorites",
@@ -17,42 +17,46 @@ const userApi = {
         username,
         password,
       });
-      return response;
+      return { response };
     } catch (error) {
-      return error;
+      return { error };
     }
   },
-  signup: async ({ username, password,confirmPassword,displayName}) => {
+  signup: async ({ username, password, confirmPassword, displayName }) => {
     try {
       const response = await publicClient.post(userEndpoints.signup, {
         username,
         password,
         confirmPassword,
-        displayName
+        displayName,
       });
-      return response;
-    } catch (error) {
-      return error;
+      return { response };
+    } catch (err) {
+      return { err };
     }
   },
-  getInfo: async ({}) => {
+  getInfo: async () => {
     try {
-        const response = await privateClient.get(userEndpoints.getInfo)
-        return {response}
-    } catch (error) {
-      return error;
+      const response = await privateClient.get(userEndpoints.getInfo);
+      return { response };
+    } catch (err) {
+      return { err };
     }
   },
-  passwordUpdate: async ({password,newPassword,confirmNewpassword}) => {
+  
+  passwordUpdate: async ({ password, newPassword, confirmNewPassword }) => {
     try {
-        const response = await privateClient.put(userEndpoints.passwordUpdate,{
-            password,
-            newPassword,
-            confirmNewpassword
-        })
-        return {response}
+      const response = await privateClient.put(userEndpoints.passwordUpdate, {
+        password,
+        newPassword,
+        confirmNewPassword,
+      });
+      return { response };
     } catch (error) {
-      return error;
+      
+      return { error };
     }
-  }
+  },
 };
+
+export default userApi;

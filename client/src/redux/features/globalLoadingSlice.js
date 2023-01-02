@@ -7,7 +7,7 @@ export const globalLoadingSlice = createSlice({
     },
     reducers :{
         setGlobalLoading :(state, action) =>{
-            state.themeMode = action.payload
+            state.globalLoading = action.payload
         } 
     }
 

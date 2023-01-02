@@ -2,19 +2,19 @@ const uiConfigs ={
     style :{
         gradienBgImage:{
             dark :{
-                backgroundImage:"linnear-gradien(to top, rgba(0,0,0,1),rgba(0,0,0,0)"
+                backgroundImage:"linear-gradient(to top, rgba(0,0,0,1),rgba(0,0,0,0))"
             },
             light :{
-                backgroundImage:"linnear-gradien(to top, rgba(245,245,245,1),rgba(0,0,0,0)"
+                backgroundImage:"linear-gradient(to top, rgba(245,245,245,1),rgba(0,0,0,0))"
 
             }
         },
         horizontailGradientBgImage:{
             dark :{
-                backgroundImage:"linnear-gradien(to top, rgba(0,0,0,1),rgba(0,0,0,0)"
+                backgroundImage:"linear-gradient(to top, rgba(0,0,0,1),rgba(0,0,0,0))"
             },
             light :{
-                backgroundImage:"linnear-gradien(to top, rgba(245,245,245,1),rgba(0,0,0,0)"
+                backgroundImage:"linear-gradient(to top, rgba(245,245,245,1),rgba(0,0,0,0))"
 
             }
         },

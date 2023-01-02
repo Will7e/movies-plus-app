@@ -28,7 +28,7 @@ const routes = [
   {
     path: "person/:personId",
     element: <PersonDetail />,
-    state: "person",
+    state: "person.detail",
   },
   {
     path: "search",
