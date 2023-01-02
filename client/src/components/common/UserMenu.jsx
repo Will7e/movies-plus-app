@@ -11,6 +11,8 @@ import { Link } from "react-router-dom";
 import menuConfigs from "../../configs/menu.configs";
 import { setUser } from "../../redux/features/userSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { setGlobalLoading } from "../../redux/features/globalLoadingSlice";
+import { toast } from "react-toastify";
 
 const UserMenu = () => {
   const { user } = useSelector((state) => state.user);
@@ -20,6 +22,15 @@ const UserMenu = () => {
 
   const toggleMenu = (e) => {
     setAnchorEl(e.currentTarget);
+  };
+
+  const signOut = () => {
+    dispatch(setGlobalLoading(true));
+    dispatch(setUser(null));
+    toast.success("Logged out");
+    setTimeout(() => {
+      dispatch(setGlobalLoading(false));
+    }, 1);
   };
 
   return (
@@ -57,10 +68,7 @@ const UserMenu = () => {
                 />
               </ListItemButton>
             ))}
-            <ListItemButton
-              sx={{ borderRadius: "10px" }}
-              onClick={() => dispatch(setUser(null))}
-            >
+            <ListItemButton sx={{ borderRadius: "10px" }} onClick={signOut}>
               <ListItemIcon>
                 <LogoutOutlinedIcon />
               </ListItemIcon>

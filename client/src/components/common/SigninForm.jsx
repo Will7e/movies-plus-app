@@ -8,6 +8,7 @@ import { setAuthModalOpen } from "../../redux/features/authModalSlice";
 import userApi from "../../api/modules/user.api";
 import { setUser } from "../../redux/features/userSlice";
 import * as Yup from "yup";
+import { setGlobalLoading } from "../../redux/features/globalLoadingSlice";
 
 const SigninForm = ({ switchAuthState }) => {
   const dispatch = useDispatch();
@@ -32,9 +33,10 @@ const SigninForm = ({ switchAuthState }) => {
     onSubmit: async (values) => {
       setErrorMessage(undefined);
       setIsLoginRequest(true);
+      dispatch(setGlobalLoading(true))
       const { response, error } = await userApi.signin(values);
       setIsLoginRequest(false);
-
+      dispatch(setGlobalLoading(false))
       if (response) {
         signinForm.resetForm();
         dispatch(setUser(response));
