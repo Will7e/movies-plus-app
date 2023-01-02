@@ -3,11 +3,10 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import http from "http";
 import mongoose from "mongoose";
-import * as dotenv from 'dotenv'
+import "dotenv/config";
 import routes from "./src/routes/index.js";
 
 
-dotenv.config()
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -20,7 +19,7 @@ const server = http.createServer(app);
 mongoose.set("strictQuery", true);
 
 mongoose
-  .connect(process.env.MONGODB_URL)
+  .connect(process.env.MONGODB_URL.toString())
   .then(() => {
     console.log("Connected to MongoDB");
     server.listen(port, () => {
