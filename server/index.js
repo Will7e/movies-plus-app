@@ -3,9 +3,11 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import http from "http";
 import mongoose from "mongoose";
-import "dotenv/config";
+import * as dotenv from 'dotenv'
 import routes from "./src/routes/index.js";
 
+
+dotenv.config()
 const app = express();
 app.use(cors());
 app.use(express.json());
