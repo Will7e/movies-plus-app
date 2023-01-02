@@ -66,7 +66,6 @@ const MediaSearch = () => {
     }, timeout);
   };
 
-  console.log("medias", medias);
 
   return (
     <>

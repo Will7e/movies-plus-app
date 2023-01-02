@@ -52,8 +52,9 @@ const userApi = {
         confirmNewPassword,
       });
       return { response };
-    } catch (err) {
-      return { err };
+    } catch (error) {
+      
+      return { error };
     }
   },
 };

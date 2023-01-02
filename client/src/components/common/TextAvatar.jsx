@@ -2,8 +2,7 @@ import { Avatar } from "@mui/material";
 
 import React from "react";
 
-const TextAvatar = ({ text,w,h }) => {
-
+const TextAvatar = ({ text, w, h }) => {
   const stringToColor = (str) => {
     let hash = 0;
     let i;
@@ -28,7 +27,9 @@ const TextAvatar = ({ text,w,h }) => {
         width: w,
         height: h,
       }}
-      children={`${text?.split(" ")[0][0]}`}
+      children={`${text.split(" ")[0][0]}${
+        text.split(" ")[1] ? text.split(" ")[1][0] : ""
+      }`}
     />
   );
 };

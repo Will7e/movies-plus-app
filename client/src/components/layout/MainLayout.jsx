@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Box, useTheme } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import GlobalLoading from "../common/GlobalLoading.jsx";
@@ -10,7 +10,6 @@ import { toast } from "react-toastify";
 import userApi from "../../api/modules/user.api.js";
 import favoriteApi from "../../api/modules/favorite.api";
 import { setListFavorites, setUser } from "../../redux/features/userSlice";
-import { display } from "@mui/system";
 
 function MainLayout() {
   const dispatch = useDispatch();

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { LoadingButton } from "@mui/lab";
 import { Box, Stack, TextField } from "@mui/material";
 import { toast } from "react-toastify";
@@ -40,12 +40,14 @@ function PasswordUpdate() {
   });
 
   const onPasswordChange = async (values) => {
-    console.log("values", values);
     if (onRequest) return;
     setOnRequest(true);
     const { response, error } = await userApi.passwordUpdate(values);
 
-    if (error) toast.error(error.message);
+    if (error) {
+      toast.error(error.message);
+      setOnRequest(false);
+    }
     if (response) {
       form.resetForm();
       navigate("/");

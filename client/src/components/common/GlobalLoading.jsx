@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { setGlobalLoading } from "../../redux/features/globalLoadingSlice";
+import { useSelector } from "react-redux";
 import { Paper, Box, Toolbar } from "@mui/material";
 import Logo from "./LoadingLogo";
 
