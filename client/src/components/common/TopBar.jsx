@@ -69,10 +69,7 @@ const TopBar = () => {
     <>
       <Sidebar open={sideBarOpen} theme={theme} toggleSideBar={toggleSideBar} />
       <ScrollAppBar>
-        <AppBar
-          elevation={0}
-          sx={{ zIndex: 9999}}
-        >
+        <AppBar elevation={0} sx={{ zIndex: 9999 }}>
           <Toolbar
             sx={{ alignItems: "center", justifyContent: "space-between" }}
           >
@@ -115,6 +112,22 @@ const TopBar = () => {
                   {item.display}
                 </Button>
               ))}
+              {user && (
+                <Button
+                  key={menuConfigs.user[0]}
+                  sx={{
+                    color: appState.includes(menuConfigs.user[0].state)
+                      ? "primary.contrastText"
+                      : "inherit",
+                    mr: 2,
+                  }}
+                  component={Link}
+                  to={menuConfigs.user[0].path}
+                  variant={appState.includes(menuConfigs.user[0].state) ? "contained" : "text"}
+                >
+                  {menuConfigs.user[0].display}
+                </Button>
+              )}
 
               <IconButton sx={{ color: "inherit" }} onClick={onSwitchTheme}>
                 {themeMode === themeModes.dark && <DarkModeOutlinedIcon />}

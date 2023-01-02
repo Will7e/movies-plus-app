@@ -16,7 +16,6 @@ import Container from "./Container";
 import ReviewItem from "./ReviewItem";
 import TextAvatar from "./TextAvatar";
 
-
 const MediaReview = ({ reviews, media, mediaType }) => {
   const { user } = useSelector((state) => state.user);
   const [listReviews, setListReviews] = useState([]);
@@ -26,7 +25,6 @@ const MediaReview = ({ reviews, media, mediaType }) => {
   const [onRequest, setOnRequest] = useState(false);
   const [content, setContent] = useState("");
   const [reviewCount, setReviewCount] = useState(0);
-
 
   const skip = 4;
 
@@ -78,18 +76,14 @@ const MediaReview = ({ reviews, media, mediaType }) => {
     }
     setReviewCount(reviewCount - 1);
     toast.success("Review has been removed");
-
-    
   };
-
-  
 
   return (
     <Container header={`REVIEWS (${reviewCount})`}>
       <Stack spacing={4} marginBottom={2}>
         {filteredReviews.map((item, index) => (
           <Box key={index}>
-            <ReviewItem review={item}  onRemoved={onRemoved} />
+            <ReviewItem review={item} onRemoved={onRemoved} />
             <Divider sx={{ display: { xs: "block", md: "none" } }} />
           </Box>
         ))}
@@ -119,17 +113,25 @@ const MediaReview = ({ reviews, media, mediaType }) => {
                 value={content}
               />
 
-              <LoadingButton
-                onClick={onAddReview}
-                loading={onRequest}
-                loadingPosition="start"
-                startIcon={<SendOutLinedIcon />}
-                sx={{ width: "max-content" }}
-                variant="contained"
-                size="large"
+              <Box
+                m={1}
+                //margin
+                display="flex"
+                justifyContent="flex-end"
+                alignItems="flex-end"
               >
-                Post
-              </LoadingButton>
+                <LoadingButton
+                  onClick={onAddReview}
+                  loading={onRequest}
+                  loadingPosition="start"
+                  startIcon={<SendOutLinedIcon />}
+                  sx={{ width: "max-content" }}
+                  variant="contained"
+                  size="large"
+                >
+                  Post
+                </LoadingButton>
+              </Box>
             </Stack>
           </Stack>
         </>
