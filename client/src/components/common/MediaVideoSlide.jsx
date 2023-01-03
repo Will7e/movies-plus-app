@@ -8,7 +8,7 @@ import MediaVideo from "./MediaVideo";
 const MediaVideoSlide = ({ videos }) => {
   return (
     <>
-      <NavigationSwiper>
+      <NavigationSwiper  >
         {videos.map((video, index) => (
           <SwiperSlide key={index}>
             <MediaVideo video={video} />
