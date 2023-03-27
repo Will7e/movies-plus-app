@@ -1,3 +1,5 @@
 https://moviesplus.onrender.com
 # movie-plus-app
- MERN project
+ Database - MongoDB
+ Frontend - ReactJs
+ Backend - NodeJs
